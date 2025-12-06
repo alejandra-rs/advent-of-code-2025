@@ -2,11 +2,6 @@ package software.aoc.day01.a;
 
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.net.URL;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DialTest {
