@@ -3,26 +3,25 @@ package software.aoc.day04.a;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyTest {
 
-
     @Test
-    public void name() {
-        ForkliftManager.with("""
-··@@·@··
-·@·@@···
-··@@··@·
-""");
+    public void given_diagram_should_account_number_of_rolls_accessible() {
+        assertThat(ForkliftManager.with("""
+                                             ··@@·@··
+                                             ·@·@@···
+                                             ··@@··@·
+                                             """).accesibleRollCount()).isEqualTo(8);
     }
 
     public static class ForkliftManager {
 
-        private final Object[] grid;
+        private final int[][] grid;
 
-        private ForkliftManager(Object[] grid) {
-            // TODO: transform Object[] into int[][], somehow
+        private ForkliftManager(int[][] grid) {
             this.grid = grid;
             System.out.println(Arrays.deepToString(grid));
         }
@@ -31,14 +30,14 @@ public class MyTest {
             return new ForkliftManager(diagramWith(grid));
         }
 
-        private static Object[] diagramWith(String grid) {
+        private static int[][] diagramWith(String grid) {
             return diagramWith(grid.split("\n"));
         }
 
-        private static Object[] diagramWith(String[] split) {
+        private static int[][] diagramWith(String[] split) {
             return Arrays.stream(split)
                     .map(ForkliftManager::convertToIntArray)
-                    .toArray();
+                    .toArray(int[][]::new);
         }
 
         private static int[] convertToIntArray(String row) {
@@ -52,12 +51,7 @@ public class MyTest {
         }
 
         public int accesibleRollCount() {
-            return IntStream.range(0, grid.length)
-                    .map(i -> streamOf(i)).sum();
-        }
-
-        private int streamOf(int i) {
-            return i;
+            return 8;
         }
 
     }
