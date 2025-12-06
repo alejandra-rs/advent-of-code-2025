@@ -2,6 +2,10 @@ package software.aoc.day01.a;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DialTest {
@@ -32,6 +36,13 @@ public class DialTest {
         assertThat(Dial.create().add("L1").count()).isEqualTo(0);
         assertThat(Dial.create().add("L1", "R1", "R50").count()).isEqualTo(1);
         assertThat(Dial.create().add("L51", "L500").count()).isEqualTo(0);
+    }
+
+    @Test
+    public void reward() throws IOException {
+        try (InputStream inputStream = DialTest.class.getResourceAsStream("/day01-a/input_aoc1.txt")) {
+            assertThat(Dial.create().execute(new String(inputStream.readAllBytes())).count()).isEqualTo(1129);
+        }
     }
 
 }

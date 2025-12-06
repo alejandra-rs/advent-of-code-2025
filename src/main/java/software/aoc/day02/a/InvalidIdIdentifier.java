@@ -3,6 +3,7 @@ package software.aoc.day02.a;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class InvalidIdIdentifier {
 
@@ -27,26 +28,26 @@ public class InvalidIdIdentifier {
     }
 
     private static Range rangeOf(String[] split) {
-        return new Range(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+        return new Range(Long.parseLong(split[0]), Long.parseLong(split[1]));
     }
 
-    public int sumInvalid() {
+    public Long sumInvalid() {
         return ranges.stream()
-                .mapToInt(this::sumInvalid)
+                .mapToLong(this::sumInvalid)
                 .sum();
     }
 
-    private int sumInvalid(Range range) {
-        return IntStream.range(range.start(), range.end() + 1)
+    private Long sumInvalid(Range range) {
+        return LongStream.range(range.start(), range.end() + 1)
                 .filter(this::isIdInvalid)
                 .sum();
     }
 
-    private boolean isIdInvalid(int id) {
+    private boolean isIdInvalid(long id) {
         return isIdInvalid(String.valueOf(id));
     }
 
     private boolean isIdInvalid(String s) {
-        return s.matches("^([0-9]+)\1$");
+        return s.matches("^([0-9]+)\\1$");
     }
 }
