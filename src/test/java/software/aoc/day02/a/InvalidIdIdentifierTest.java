@@ -1,7 +1,6 @@
 package software.aoc.day02.a;
 
 import org.junit.Test;
-import software.aoc.day01.a.Dial;
 import software.aoc.day01.a.DialTest;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class InvalidIdIdentifierTest {
 
     @Test
     public void reward() throws IOException {
-        try (InputStream inputStream = DialTest.class.getResourceAsStream("/day02-a/input_aoc2.txt")) {
+        try (InputStream inputStream = DialTest.class.getResourceAsStream("/day02/input_aoc2.txt")) {
             assertThat(InvalidIdIdentifier.create(new String(inputStream.readAllBytes()).split(",")).sumInvalid()).isEqualTo(41294979841L);
         }
     }

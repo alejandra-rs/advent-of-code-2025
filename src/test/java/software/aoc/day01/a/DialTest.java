@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,7 +39,7 @@ public class DialTest {
 
     @Test
     public void reward() throws IOException {
-        try (InputStream inputStream = DialTest.class.getResourceAsStream("/day01-a/input_aoc1.txt")) {
+        try (InputStream inputStream = DialTest.class.getResourceAsStream("/day01/input_aoc1.txt")) {
             assertThat(Dial.create().execute(new String(inputStream.readAllBytes())).count()).isEqualTo(1129);
         }
     }

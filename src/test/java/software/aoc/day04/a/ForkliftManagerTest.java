@@ -34,7 +34,7 @@ public class ForkliftManagerTest {
 
     @Test
     public void reward() throws IOException {
-        try (InputStream inputStream = ForkliftManagerTest.class.getResourceAsStream("/day04-a/input_aoc4.txt")) {
+        try (InputStream inputStream = ForkliftManagerTest.class.getResourceAsStream("/day04/input_aoc4.txt")) {
             assertThat(ForkliftManager.with(new String(inputStream.readAllBytes())).accesibleRollCount()).isEqualTo(1505);
         }
     }

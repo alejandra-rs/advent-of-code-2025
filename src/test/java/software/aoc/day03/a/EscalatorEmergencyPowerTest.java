@@ -31,7 +31,7 @@ public class EscalatorEmergencyPowerTest {
 
     @Test
     public void reward() throws IOException {
-        try (InputStream inputStream = EscalatorEmergencyPowerTest.class.getResourceAsStream("/day03-a/input_aoc3.txt")) {
+        try (InputStream inputStream = EscalatorEmergencyPowerTest.class.getResourceAsStream("/day03/input_aoc3.txt")) {
             assertThat(EscalatorEmergencyPower.with(new String(inputStream.readAllBytes()).split("\n")).joltage()).isEqualTo(17613);
         }
     }
