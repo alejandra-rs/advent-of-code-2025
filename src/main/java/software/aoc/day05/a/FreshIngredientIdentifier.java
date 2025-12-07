@@ -31,12 +31,12 @@ public class FreshIngredientIdentifier {
 
     public int countFreshIngredientsFrom(String... ingredients) {
         return (int) Arrays.stream(ingredients)
-                .mapToInt(Integer::parseInt)
-                .filter(this::isValid)
+                .mapToLong(Long::parseLong)
+                .filter(this::isFresh)
                 .count();
     }
 
-    private boolean isValid(int i) {
-        return ranges.stream().noneMatch(r -> r.in(i));
+    private boolean isFresh(long i) {
+        return ranges.stream().anyMatch(r -> r.in(i));
     }
 }
