@@ -2,6 +2,9 @@ package software.aoc.day07.a;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TachyonManifoldTest {
@@ -47,5 +50,12 @@ public class TachyonManifoldTest {
                                              .......
                                              """).countSplitBeams()).isEqualTo(4);
         assertThat(TachyonManifold.with(tachyon_map).countSplitBeams()).isEqualTo(21);
+    }
+
+    @Test
+    public void reward() throws IOException {
+        try (InputStream inputStream = TachyonManifoldTest.class.getResourceAsStream("/day07/input_aoc7.txt")) {
+            assertThat(TachyonManifold.with(new String(inputStream.readAllBytes())).countSplitBeams()).isEqualTo(1587);
+        }
     }
 }
