@@ -37,6 +37,7 @@ public class TachyonManifoldTest {
                                              .^..^..
                                              .......
                                              """).extend()).isEqualTo(new int[] {83, 46, 83, 83, 46, 83, 46});
+        assertThat(TachyonManifold.with(tachyon_map).extend()).isEqualTo(new int[] {83, 46, 83, 46, 83, 46, 83, 46, 83, 46, 83, 83, 83, 46, 83});
     }
 
     public static class TachyonManifold {
@@ -68,7 +69,41 @@ public class TachyonManifoldTest {
         }
 
         public int[] extend() {
-            return new int[] {83, 46, 83, 83, 46, 83, 46};
+            return extend(0, new Step(map[0], 0)).layer();
+        }
+
+        private Step extend(int i, Step step) {
+            if (i == map.length - 1) return step;
+            return extend(i + 1, propagate(i, step));
+        }
+
+        private Step propagate(int i, Step step) {
+            return new Step(fillNextLayer(i, step, new int[step.layer().length]),
+                     step.nSplits() + splitBeamsIn(i, step.layer()));
+        }
+
+        private int[] fillNextLayer(int i, Step step, int[] nextLayer) {
+            Arrays.fill(nextLayer, 46);
+            IntStream.range(0, nextLayer.length)
+                    .filter(j -> step.layer()[j] == 83)
+                    .forEach(j -> propagateBeam(i, j, nextLayer));
+            return nextLayer;
+        }
+
+        private void propagateBeam(int i, int j, int[] nextLayer) {
+            if (map[i + 1][j] != 94) {
+                nextLayer[j] = 83;
+                return;
+            }
+            nextLayer[j - 1] = nextLayer[j + 1] = 83;
+        }
+
+        private int splitBeamsIn(int i, int[] currentLayer) {
+            return (int) IntStream.range(0, currentLayer.length)
+                    .filter(j -> currentLayer[j] == 83 && map[i+1][j] == 94)
+                    .count();
         }
     }
+
+    public record Step(int[] layer, int nSplits) {}
 }
