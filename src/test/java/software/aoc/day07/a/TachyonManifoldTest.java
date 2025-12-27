@@ -46,5 +46,6 @@ public class TachyonManifoldTest {
                                              .^..^..
                                              .......
                                              """).countSplitBeams()).isEqualTo(4);
+        assertThat(TachyonManifold.with(tachyon_map).countSplitBeams()).isEqualTo(21);
     }
 }

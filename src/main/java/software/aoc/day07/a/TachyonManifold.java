@@ -36,7 +36,7 @@ public class TachyonManifold {
     }
 
     public int countSplitBeams() {
-        return 4;
+        return extend(0, new Step(map[0], 0)).nSplits();
     }
 
     private Step extend(int i, Step step) {
