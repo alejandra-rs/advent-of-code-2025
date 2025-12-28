@@ -2,6 +2,8 @@ package software.aoc.day08.a;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,6 +51,15 @@ public class PlaygroundTest {
         assertThat(Playground.with(boxes).multiplyLargestCircuits(7)).isEqualTo(6);
         assertThat(Playground.with(parseInputIn(inputBoxes)).multiplyLargestCircuits(10)).isEqualTo(40);
     }
+
+    @Test
+    public void reward() throws IOException {
+        try (InputStream inputStream = PlaygroundTest.class.getResourceAsStream("/day08/input_aoc8.txt")) {
+            assertThat(Playground.with(parseInputIn(new String(inputStream.readAllBytes()))).multiplyLargestCircuits(1000))
+                      .isEqualTo(135169);
+        }
+    }
+
 
     private List<JunctionBox> parseInputIn(String inputBoxes) {
         return parseInputIn(inputBoxes.split("\n"));
