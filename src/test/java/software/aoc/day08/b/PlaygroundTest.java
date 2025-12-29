@@ -1,11 +1,9 @@
-package software.aoc.day08.a;
+package software.aoc.day08.b;
 
 import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlaygroundTest {
 
@@ -43,15 +41,16 @@ public class PlaygroundTest {
                                           2,2,2
                                           10,10,10
                                           23,23,23
-                                          """).multiplyLargestCircuits(7)).isEqualTo(6);
-        assertThat(Playground.with(inputBoxes).multiplyLargestCircuits(10)).isEqualTo(40);
+                                          """).lastConnectedBoxes()).isEqualTo(230);
+        assertThat(Playground.with(inputBoxes).lastConnectedBoxes()).isEqualTo(25272);
     }
 
     @Test
     public void reward() throws IOException {
         try (InputStream inputStream = PlaygroundTest.class.getResourceAsStream("/day08/input_aoc8.txt")) {
-            assertThat(Playground.with(new String(inputStream.readAllBytes())).multiplyLargestCircuits(1000))
-                      .isEqualTo(135169);
+            assertThat(Playground.with(new String(inputStream.readAllBytes())).lastConnectedBoxes())
+                    .isEqualTo(302133440);
         }
     }
 }
+

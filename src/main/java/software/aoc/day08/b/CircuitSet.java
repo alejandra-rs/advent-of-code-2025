@@ -1,41 +1,37 @@
-package software.aoc.day08.a;
+package software.aoc.day08.b;
 
 import software.aoc.day08.JunctionBox;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static java.util.Collections.reverseOrder;
 import static java.util.stream.Collectors.toSet;
 
 public class CircuitSet {
 
     private final Set<Set<JunctionBox>> circuits;
+    private final JunctionBox[] lastConnected;
 
-    private CircuitSet(Set<Set<JunctionBox>> circuits) {
+    private CircuitSet(Set<Set<JunctionBox>> circuits, JunctionBox[] lastConnected) {
         this.circuits = circuits;
+        this.lastConnected = lastConnected;
     }
 
     public static CircuitSet from(Stream<JunctionBox> boxes) {
-        return new CircuitSet(boxes.map(Set::of).collect(toSet()));
+        return new CircuitSet(boxes.map(Set::of).collect(toSet()), new JunctionBox[] {});
     }
 
-    public Stream<Integer> largestCircuitSizes(int nCircuits) {
-        return circuits.stream()
-                .map(Set::size)
-                .sorted(reverseOrder())
-                .limit(nCircuits);
+    public JunctionBox lastConnectedBoxAt(int index) {
+        return lastConnected[index];
     }
 
     public CircuitSet connect(JunctionBox box1, JunctionBox box2) {
         if (circuitOf(box1).equals(circuitOf(box2))) return this;
-        return new CircuitSet(merge(circuitOf(box1), circuitOf(box2)));
+        return new CircuitSet(merge(circuitOf(box1), circuitOf(box2)), new JunctionBox[] {box1, box2});
     }
 
     private Set<JunctionBox> circuitOf(JunctionBox box) {
-        return circuits.stream()
-                .filter(c -> c.contains(box))
-                .findFirst().orElseThrow();
+        return circuits.stream().filter(c -> c.contains(box)).findFirst().orElseThrow();
     }
 
     private Set<Set<JunctionBox>> merge(Set<JunctionBox> circuit1, Set<JunctionBox> circuit2) {

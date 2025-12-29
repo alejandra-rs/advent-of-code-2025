@@ -1,4 +1,4 @@
-package software.aoc.day08.a;
+package software.aoc.day08;
 
 public class Pair {
 

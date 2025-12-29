@@ -1,4 +1,4 @@
-package software.aoc.day08.a;
+package software.aoc.day08.b;
 
 import software.aoc.day08.JunctionBox;
 import software.aoc.day08.Pair;
@@ -26,15 +26,16 @@ public class Playground {
         return Arrays.stream(boxes.split("\n")).map(JunctionBox::from).toList();
     }
 
-    public int multiplyLargestCircuits(int nConnections) {
-        return wireBoxesAcross(nConnections)
-                .largestCircuitSizes(3)
-                .reduce((a, b) -> a * b).orElse(0);
+    public int lastConnectedBoxes() {
+        return multipliedXCoordinatesIn(unifiedCircuitSet());
     }
 
-    private CircuitSet wireBoxesAcross(int nConnections) {
+    private int multipliedXCoordinatesIn(CircuitSet circuitSet) {
+        return circuitSet.lastConnectedBoxAt(0).x() * circuitSet.lastConnectedBoxAt(1).x();
+    }
+
+    private CircuitSet unifiedCircuitSet() {
         return allBoxWirings()
-                    .limit(nConnections)
                     .reduce(CircuitSet.from(boxes.stream()),
                             (c, p) -> c.connect(p.box1(), p.box2()),
                             (a, _) -> a);
