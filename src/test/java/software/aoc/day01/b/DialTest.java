@@ -1,4 +1,4 @@
-package software.aoc.day01.a;
+package software.aoc.day01.b;
 
 import org.junit.Test;
 
@@ -22,26 +22,17 @@ public class DialTest {
                                           """;
 
     @Test
-    public void given_orders_should_account_the_final_position() {
-        assertThat(Dial.create().position()).isEqualTo(50);
-        assertThat(Dial.create().add("L1").position()).isEqualTo(49);
-        assertThat(Dial.create().add("L1", "R1", "R50").position()).isEqualTo(0);
-        assertThat(Dial.create().add("L51", "L500").position()).isEqualTo(99);
-        assertThat(Dial.create().execute(orders).position()).isEqualTo(32);
-    }
-
-    @Test
-    public void given_orders_should_account_the_times_that_position_is_zero() {
-        assertThat(Dial.create().execute(orders).count()).isEqualTo(3);
+    public void given_orders_should_account_the_times_that_dial_crosses_zero() {
+        assertThat(Dial.create().execute(orders).count()).isEqualTo(6);
         assertThat(Dial.create().add("L1").count()).isEqualTo(0);
         assertThat(Dial.create().add("L1", "R1", "R50").count()).isEqualTo(1);
-        assertThat(Dial.create().add("L51", "L500").count()).isEqualTo(0);
+        assertThat(Dial.create().add("L51", "L500").count()).isEqualTo(6);
     }
 
     @Test
     public void reward() throws IOException {
         try (InputStream inputStream = DialTest.class.getResourceAsStream("/day01/input_aoc1.txt")) {
-            assertThat(Dial.create().execute(new String(inputStream.readAllBytes())).count()).isEqualTo(1129);
+            assertThat(Dial.create().execute(new String(inputStream.readAllBytes())).count()).isEqualTo(6638);
         }
     }
 

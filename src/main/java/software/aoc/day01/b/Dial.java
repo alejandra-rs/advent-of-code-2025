@@ -1,4 +1,4 @@
-package software.aoc.day01.a;
+package software.aoc.day01.b;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,22 +31,13 @@ public class Dial {
     }
 
     public int count() {
-        return (int) iterate()
-                .map(this::sumPartial)
-                .filter(s -> s == 0)
-                .count();
+        return IntStream.range(0, rotations.size())
+                .map(this::crossedZeroAtIndex)
+                .sum();
     }
 
-    public int position() {
-        return normalize(sumAll());
-    }
-
-    private int sumAll() {
-        return sum(rotations.stream());
-    }
-
-    private IntStream iterate() {
-        return IntStream.rangeClosed(1, rotations.size());
+    private int crossedZeroAtIndex(int i) {
+        return rotations.get(i).crossingsFrom(sumPartial(i));
     }
 
     private int sumPartial(int size) {
