@@ -11,32 +11,24 @@ public class FreshIngredientIdentifier {
         this.ranges = ranges;
     }
 
-    public static FreshIngredientIdentifier create(String... ranges) {
-        return new FreshIngredientIdentifier(parsedListOf(ranges));
+    public static FreshIngredientIdentifier create(String ranges) {
+        return new FreshIngredientIdentifier(parsedListOf(ranges.split("\n")));
     }
 
     private static List<Range> parsedListOf(String[] ranges) {
         return Arrays.stream(ranges)
-                .map(FreshIngredientIdentifier::rangeOf)
+                .map(Range::from)
                 .toList();
     }
 
-    private static Range rangeOf(String rangeString) {
-        return rangeOf(rangeString.split("-"));
-    }
-
-    private static Range rangeOf(String[] split) {
-        return new Range(Long.parseLong(split[0]), Long.parseLong(split[1]));
-    }
-
-    public int countFreshIngredientsFrom(String... ingredients) {
-        return (int) Arrays.stream(ingredients)
+    public int countFreshIngredientsFrom(String ingredients) {
+        return (int) Arrays.stream(ingredients.split("\n"))
                 .mapToLong(Long::parseLong)
                 .filter(this::isFresh)
                 .count();
     }
 
     private boolean isFresh(long i) {
-        return ranges.stream().anyMatch(r -> r.in(i));
+        return ranges.stream().anyMatch(r -> r.includes(i));
     }
 }

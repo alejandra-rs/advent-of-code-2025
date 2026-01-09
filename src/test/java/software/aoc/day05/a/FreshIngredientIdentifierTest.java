@@ -2,7 +2,8 @@ package software.aoc.day05.a;
 
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,9 +28,9 @@ public class FreshIngredientIdentifierTest {
     @Test
     public void given_ranges_should_count_fresh_ingredients() {
         assertThat(FreshIngredientIdentifier.create("10-20")
-                    .countFreshIngredientsFrom("1", "5", "10", "15", "20")).isEqualTo(3);
-        assertThat(FreshIngredientIdentifier.create(ranges.split("\n"))
-                .countFreshIngredientsFrom(ingredients.split("\n"))).isEqualTo(3);
+                    .countFreshIngredientsFrom("1\n5\n10\n15\n20")).isEqualTo(3);
+        assertThat(FreshIngredientIdentifier.create(ranges)
+                .countFreshIngredientsFrom(ingredients)).isEqualTo(3);
     }
 
     @Test
@@ -43,13 +44,13 @@ public class FreshIngredientIdentifierTest {
         return createRangesAndCountFreshIngredientsFrom(new String(inputStream.readAllBytes()));
     }
 
-    private int createRangesAndCountFreshIngredientsFrom(String str) {
-        return createRangesAndCountFreshIngredientsFrom(str.split("\n\n"));
+    private int createRangesAndCountFreshIngredientsFrom(String string) {
+        return createRangesAndCountFreshIngredientsFrom(string.split("\n\n"));
     }
 
     private int createRangesAndCountFreshIngredientsFrom(String[] split) {
-        return FreshIngredientIdentifier.create(split[0].split("\n"))
-                .countFreshIngredientsFrom(split[1].split("\n"));
+        return FreshIngredientIdentifier.create(split[0])
+                                        .countFreshIngredientsFrom(split[1]);
     }
 
 }
