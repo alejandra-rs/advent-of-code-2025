@@ -1,4 +1,4 @@
-package software.aoc.day03.a;
+package software.aoc.day03.b;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,9 +15,9 @@ public class EscalatorEmergencyPower {
         return new EscalatorEmergencyPower(listOf(banks.split("\n")));
     }
 
-    public int joltage() {
+    public long joltage() {
         return banks.stream()
-                .mapToInt(BatteryBank::maxJoltage)
+                .mapToLong(BatteryBank::maxJoltage)
                 .sum();
     }
 
@@ -26,4 +26,5 @@ public class EscalatorEmergencyPower {
                 .map(BatteryBank::from)
                 .toList();
     }
+
 }

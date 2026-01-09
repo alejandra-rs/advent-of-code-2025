@@ -1,4 +1,4 @@
-package software.aoc.day03.a;
+package software.aoc.day03.b;
 
 import org.junit.Test;
 
@@ -17,23 +17,23 @@ public class EscalatorEmergencyPowerTest {
 
     @Test
     public void given_battery_bank_should_account_joltage() {
-        assertThat(EscalatorEmergencyPower.from("989216248294").joltage()).isEqualTo(99);
-        assertThat(EscalatorEmergencyPower.from("108337364723").joltage()).isEqualTo(87);
-        assertThat(EscalatorEmergencyPower.from("123016263670").joltage()).isEqualTo(70);
+        assertThat(EscalatorEmergencyPower.from("989216248294345").joltage()).isEqualTo(996248294345L);
+        assertThat(EscalatorEmergencyPower.from("108337364723224").joltage()).isEqualTo(837364723224L);
+        assertThat(EscalatorEmergencyPower.from("123016263670993").joltage()).isEqualTo(316263670993L);
     }
 
     @Test
     public void given_multiple_battery_banks_should_account_joltage() {
-        assertThat(EscalatorEmergencyPower.from("989216248294\n123016263670").joltage()).isEqualTo(169);
-        assertThat(EscalatorEmergencyPower.from("123512314532\n111113332321").joltage()).isEqualTo(88);
-        assertThat(EscalatorEmergencyPower.from(batteryBanks).joltage()).isEqualTo(357);
+        assertThat(EscalatorEmergencyPower.from("989216248294\n123016263670").joltage()).isEqualTo(1112232511964L);
+        assertThat(EscalatorEmergencyPower.from("123512314532\n111113332321").joltage()).isEqualTo(234625646853L);
+        assertThat(EscalatorEmergencyPower.from(batteryBanks).joltage()).isEqualTo(3121910778619L);
     }
 
     @Test
     public void reward() throws IOException {
         try (InputStream inputStream = EscalatorEmergencyPowerTest.class.getResourceAsStream("/day03/input_aoc3.txt")) {
             assertThat(EscalatorEmergencyPower.from(new String(inputStream.readAllBytes())).joltage())
-                    .isEqualTo(17613);
+                    .isEqualTo(175304218462560L);
         }
     }
 }
