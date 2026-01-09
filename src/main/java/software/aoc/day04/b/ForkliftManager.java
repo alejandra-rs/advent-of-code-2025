@@ -1,4 +1,7 @@
-package software.aoc.day04.a;
+package software.aoc.day04.b;
+
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class ForkliftManager {
 
@@ -12,9 +15,9 @@ public class ForkliftManager {
         return new ForkliftManager(Warehouse.from(grid));
     }
 
-    public long accesibleRollCount() {
-        return warehouse.rollPositions()
-                .filter(warehouse::isAccessible)
-                .count();
+    public long allAccessibleRolls() {
+        return Stream.iterate(warehouse, Objects::nonNull, Warehouse::next)
+                .mapToLong(Warehouse::accessibleRollCount)
+                .sum();
     }
 }
