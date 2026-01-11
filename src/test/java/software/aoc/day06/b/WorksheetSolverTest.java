@@ -1,7 +1,6 @@
-package software.aoc.day06.a;
+package software.aoc.day06.b;
 
 import org.junit.Test;
-import software.aoc.day05.a.FreshIngredientIdentifier;
 import software.aoc.day06.WorksheetSolver;
 
 import java.io.IOException;
@@ -18,25 +17,23 @@ public class WorksheetSolverTest {
                                            *   +   *   +  \s
                                            """;
 
-
-
     @Test
     public void given_operands_and_operators_should_solve_worksheet() {
         assertThat(WorksheetSolver.solve(CephalopodWorksheetReader.from("""
-                                                    1  2  3\s
-                                                   10 11 15\s
-                                                   *  +  * \s
-                                                   """)))
-                .isEqualTo(68);
+                                                                                   1  2  3\s
+                                                                                  10 11 15\s
+                                                                                  *  +  * \s
+                                                                                  """)))
+                .isEqualTo(67);
         assertThat(WorksheetSolver.solve(CephalopodWorksheetReader.from(worksheet)))
-                .isEqualTo(4277556);
+                .isEqualTo(3263827);
     }
 
     @Test
     public void reward() throws IOException {
-        try (InputStream inputStream = FreshIngredientIdentifier.class.getResourceAsStream("/day06/input_aoc6.txt")) {
+        try (InputStream inputStream = WorksheetSolverTest.class.getResourceAsStream("/day06/input_aoc6.txt")) {
             assertThat(WorksheetSolver.solve(CephalopodWorksheetReader.from(new String(inputStream.readAllBytes()))))
-                    .isEqualTo(4405895212738L);
+                    .isEqualTo(7450962489289L);
         }
     }
 }
