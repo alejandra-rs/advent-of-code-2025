@@ -1,9 +1,11 @@
 package software.aoc.day07.a;
 
 import org.junit.Test;
+import software.aoc.day07.TachyonCell;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,14 +32,16 @@ public class TachyonManifoldTest {
 
     @Test
     public void given_tachyon_map_should_account_beam_propagation() {
-        assertThat(TachyonManifold.with("""
+        assertThat(intArrayIn(TachyonManifold.with("""
                                              ...S...
                                              ...^...
                                              ..^...^
                                              .^..^..
                                              .......
-                                             """).extend()).isEqualTo(new int[] {83, 46, 83, 83, 46, 83, 46});
-        assertThat(TachyonManifold.with(tachyon_map).extend()).isEqualTo(new int[] {83, 46, 83, 46, 83, 46, 83, 46, 83, 46, 83, 83, 83, 46, 83});
+                                             """).propagateBeam()))
+                .isEqualTo(new int[] {83, 46, 83, 83, 46, 83, 46});
+        assertThat(intArrayIn(TachyonManifold.with(tachyon_map).propagateBeam()))
+                .isEqualTo(new int[] {83, 46, 83, 46, 83, 46, 83, 46, 83, 46, 83, 83, 83, 46, 83});
     }
 
     @Test
@@ -57,5 +61,11 @@ public class TachyonManifoldTest {
         try (InputStream inputStream = TachyonManifoldTest.class.getResourceAsStream("/day07/input_aoc7.txt")) {
             assertThat(TachyonManifold.with(new String(inputStream.readAllBytes())).countSplitBeams()).isEqualTo(1587);
         }
+    }
+
+    private int[] intArrayIn(List<TachyonCell> tachyonCells) {
+        return tachyonCells.stream()
+                .mapToInt(TachyonCell::cellValue)
+                .toArray();
     }
 }
