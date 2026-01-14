@@ -1,7 +1,7 @@
-target/
+targetJoltage/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+!**/src/main/**/targetJoltage/
+!**/src/test/**/targetJoltage/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
