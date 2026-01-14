@@ -6,8 +6,7 @@ import software.aoc.day07.TachyonGrid;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static software.aoc.day07.TachyonCell.BEAM;
-import static software.aoc.day07.TachyonCell.SPLITTER;
+import static software.aoc.day07.TachyonCell.*;
 
 public class TachyonManifold {
 

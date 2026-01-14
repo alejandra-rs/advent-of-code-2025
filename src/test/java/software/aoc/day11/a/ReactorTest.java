@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ReactorTest {
 
     static final String devices = """

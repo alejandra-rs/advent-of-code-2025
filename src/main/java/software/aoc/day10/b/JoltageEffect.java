@@ -1,6 +1,6 @@
 package software.aoc.day10.b;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import static java.lang.Math.pow;
